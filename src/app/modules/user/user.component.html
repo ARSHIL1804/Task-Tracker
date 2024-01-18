@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="header">
+        User Profile
+    </div>
+
+    <div class="details-form-container">
+        <form [formGroup]="userDetailsForm">
+            <div class="form-group">
+                <label for="email">
+                    Email*
+                </label>
+                <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                    name="email" [ngClass]="{ 'is-invalid': saveClicked && f.email.errors }"
+                    [(ngModel)]="userDetails.userEmail" autocomplete="off" (change)="emailChange()">
+                <div *ngIf="saveClicked && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.pattern">Email is not valid</div>
+                    <div *ngIf="f.email.errors.feildError">{{ERROR_ENUMS.DUPLICATE_USER.errorMessage}}</div>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="name">
+                    Name*
+                </label>
+                <input type="text" formControlName="name" class="form-control" placeholder="User Name"
+                    name="name" [ngClass]="{ 'is-invalid': saveClicked && f.name.errors }"
+                    [(ngModel)]="userDetails.userName" autocomplete="off">
+                <div *ngIf="saveClicked && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">User name is required</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">
+                    Avatar
+                </label>
+                
+                <div class="avatars-container">
+                        <div *ngFor="let avatar of avatars" [class.selected]="userDetails.avatar === avatar.id">
+                          <img  [src]="avatar.path" alt="{{ avatar.id }}" (click)="selectAvatar(avatar.id)">
+                          <input type="radio" formControlName="avatar" [(ngModel)]="userDetails.avatar"  [value]="avatar.id" style="display: none;">
+                        </div>
+                </div>
+            </div>
+    
+            <div class="form-group submit-btn-container">
+                <button class="btn btn-primary" [disabled]="!saveButtonEnabled" (click)="saveUserDetails()">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

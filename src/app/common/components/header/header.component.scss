@@ -1,0 +1,14 @@
+@import '../../../../assets/styles/colors.scss';
+.navbar{
+    height: 3rem;
+    padding: 12px 24px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+   .brand-img{
+       font-size: 1rem;
+       letter-spacing: 0.2ch;
+       font-weight: 500;
+       span{
+        color: $primary_color2;
+       }
+   }
+}

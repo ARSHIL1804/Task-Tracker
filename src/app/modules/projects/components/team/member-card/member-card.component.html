@@ -1,0 +1,27 @@
+<div class="memebr-card">
+
+    <div class="member-info-container">
+        <div class="name">
+            {{data.user.userName}}
+        </div>
+        <div class="email">
+            {{data.user.userEmail}}
+
+        </div>
+    </div>
+
+
+    <div class="task-info">
+        <div class="status-info">
+            <label >In Progress : {{data.taskData.inProgressTasks}}</label>
+        </div>
+        <div class="status-info">
+            <label >Completed : {{data.taskData.completedTasks}}</label>
+        </div>
+        <div class="status-info">
+            <label >Total Assigned : {{data.taskData.totalTasks}}</label>
+        </div>
+
+    </div>
+
+</div>

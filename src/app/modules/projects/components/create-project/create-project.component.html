@@ -1,0 +1,59 @@
+<div class="header">
+    <div class="back-action">
+        <i class="fa-solid fa-arrow-left"></i> Back to project listing
+    </div>
+</div>
+<div class="content">
+    <div class="project-info">
+        <div class="section-title">
+            Add Project Details
+        </div>
+        <form [formGroup]="projectForm">
+            <div class="form-group">
+                <label for="name">
+                    Name*
+                </label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Try Project Name,Team Name, Goals etc..."
+                    name="name"  [ngClass]="{ 'is-invalid': submitClicked && f.name.errors }"
+                    [(ngModel)]="projectModel.name" autocomplete="off">
+                    <div *ngIf="submitClicked && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                        <div *ngIf="f.name.errors.pattern">Name is not valid</div>
+                        <div *ngIf="f.name.errors.feildError">Name is already taken</div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <label for="key">
+                    Key*
+                </label>
+                <input type="text" formControlName="key" class="form-control" placeholder="Try Project Acronyms like FB, WP etc..."
+                    name="key"  [ngClass]="{ 'is-invalid': submitClicked && f.key.errors }"
+                    [(ngModel)]="projectModel.key" autocomplete="off">
+                <div *ngIf="submitClicked && f.key.errors" class="invalid-feedback">
+                    <div *ngIf="f.key.errors.required">Key is required</div>
+                    <div *ngIf="f.key.errors.pattern">Key must start with an uppercase letter, by one or more uppercase alphanumeric characters.</div>
+                    <div *ngIf="f.key.errors.feildError">Key is already in use by other project</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">
+                    Description
+                </label>
+                <input type="text" formControlName="description" class="form-control" placeholder="Try Project description"
+                    name="description" 
+                    [(ngModel)]="projectModel.description" autocomplete="off">
+            </div>
+            <div class="form-group submit-btn-container">
+                <button class="btn btn-primary" (click)="createProject()">
+                    Create Project
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="images">
+        <img src="{{PROJECT_IMAGES[currentImage]}}" alt="Project Image">
+    </div>
+
+</div>

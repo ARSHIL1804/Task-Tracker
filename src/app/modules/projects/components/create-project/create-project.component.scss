@@ -1,0 +1,67 @@
+@import '../../../../../assets/styles/colors.scss';
+
+
+.header{
+    .back-action{
+        width: fit-content;
+        padding: 4px 12px;
+        margin-left: -16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 4px;
+        cursor: pointer;
+        i{
+            margin-right: 8px;
+        }
+    }
+    .back-action:hover{
+        background-color: $gray_2;
+    }
+}
+
+.content{
+    width: 100%;
+    display: flex;
+    .project-info{
+        width: 50%;
+        padding: 40px 24px 40px 40px;
+        display: flex;
+        flex-direction: column;
+
+        .section-title{
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .form-group{
+            margin-top: 16px;
+            outline: none;
+            box-shadow: none;
+            label{
+                font-size: 12px;
+                margin-top: 4px;
+                margin-bottom: 4px;
+                width: 80%;
+            }
+            input{
+                width: 80%;
+                border: 2px solid $gray_1;
+                border-radius: 2px;
+                font-size: 14px;
+            }
+            .other-options{
+                display: flex;
+                color: $black;
+                font-size: 14px;
+            }
+        }
+    }
+    .images{
+        width: 50%;
+
+        img{
+            width: 100%;
+        }
+    }
+}

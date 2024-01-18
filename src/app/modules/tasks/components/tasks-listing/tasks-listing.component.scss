@@ -1,0 +1,157 @@
+@import '../../../../../assets/styles/colors.scss';
+
+.topbar{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+
+    .page-title{
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+    &>div{
+        margin: 4px;
+    }
+    input{
+        padding:4px;
+        font-size: 16px;
+        height: 32px;
+        border: 1px solid $black;
+        outline: none;
+        border-radius: 2px;
+    }
+    input:focus{
+        border: 2px solid $primary_color2;
+    }
+
+    .total-count{
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: $primary_color2;
+        color: $primary_color;
+        font-weight: 500;
+    }
+
+    button{
+        height: 32px;
+        padding: 0px 16px;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        color: $primary_color;
+        background-color: $primary_color2;
+    }
+    .filters{
+        display: flex;
+        .filter{
+            height: 32px;
+            padding: 0px 8px;
+            font-size: 12px;
+            font-weight: 400;
+            background-color: $gray_2;
+            display: flex;
+            justify-content: center;
+            border-radius: 4px;
+
+            .label{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 500;
+            }
+            .filter-item{
+                margin-left: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $primary_color2;
+                span{
+                    margin-left: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: $primary_color2;
+                    color: $primary_color;
+                }
+            }
+            .menu-icon{
+                margin-left: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                i::before{
+                   color: $black;
+                   font-size: 14px;
+                }
+            }
+            .selected{
+                color: $primary_color2;
+                i::before{
+                    color: $primary_color2;
+                    font-size: 14px;
+                 }
+            }
+        }
+        .prioriy-filter{
+            margin-left: 8px;
+        }
+    }
+}
+
+
+.tasks-listing-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 10px;
+}
+
+.no-result{
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 400px) {
+    .tasks-listing-container{
+        grid-template-columns: repeat((3, 1fr));
+    }
+}
+
+.load-more-container{
+    display: flex;
+    height: 32px;
+    margin: 8px 0px ;
+    justify-content: center;
+
+    button{
+        padding: 0px 16px;
+        margin: 0px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        color: $primary_color2;
+        background-color: transparent;
+    }
+}
+
+::ng-deep .mat-mdc-form-field > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}

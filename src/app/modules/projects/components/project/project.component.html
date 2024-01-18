@@ -1,0 +1,20 @@
+<div class="header" *ngIf="showHeader">
+    <div class="name">
+        <i class="fa-solid fa-folder"></i>{{project.name}}
+    </div>
+
+    <ul class="nav">
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink="tasks">Tasks</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink='team'>Team</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink='details'>Details</a>
+        </li>
+    </ul>
+</div>
+<div class="content">
+    <router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
+</div>

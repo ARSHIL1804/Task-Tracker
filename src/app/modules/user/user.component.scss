@@ -1,0 +1,66 @@
+@import '../../../assets/styles/colors.scss';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    .header{
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    .details-form-container{
+        margin-top: 20px;
+        width: 40%;
+    
+        .form-group{
+            margin-top: 16px;
+            outline: none;
+            box-shadow: none;
+            label{
+                margin-bottom: 8px;
+            }
+            input{
+                border: 2px solid $gray_1;
+                border-radius: 2px;
+                font-size: 14px;
+            }
+            .other-options{
+                display: flex;
+                color: $black;
+                font-size: 14px;
+            }
+
+            .avatars-container{
+                display: flex;
+
+                &>div{
+                    margin-right: 8px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 2px;
+                    img{
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                    }
+
+                    &.selected{
+                        border: 2px solid black;
+                    }                    
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .details-form-container{
+        width: 80%;
+    }
+}

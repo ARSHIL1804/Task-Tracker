@@ -1,0 +1,17 @@
+<div class="dialog-container">
+    <div class="title">
+        {{data.dialogTitle}}
+    </div>
+
+    <div class="content">
+        {{data.dialogContent}}
+    </div>
+
+    <div class="actions" *ngIf="data.buttonArray">
+        <button mat-flat-button *ngIf="data.buttonArray.includes(1)" [mat-dialog-close]="false">NO</button>
+        <button mat-flat-button *ngIf="data.buttonArray.includes(0)" [mat-dialog-close]="true">YES</button>
+        <button mat-flat-button *ngIf="data.buttonArray.includes(2)" [mat-dialog-close]="true">OK</button>
+
+    </div>
+
+</div>

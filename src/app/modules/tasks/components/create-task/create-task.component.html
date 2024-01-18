@@ -1,0 +1,231 @@
+<div class="create-task-container">
+    <div class="task-left-column-container">
+        <div class="item-container taks-path-container">
+            <div *ngIf="projectKey" classs="folder">
+                <a [routerLink]="['../']">{{projectKey}}</a>
+            </div>
+            <div *ngIf="projectKey" class="divider">/</div>
+
+            <div class="folder">
+                <a  [routerLink]="['../']">TASKS</a>
+            </div>
+            <div class="divider">/</div>
+            <div>
+                <a
+                >{{taskModel.name}}</a>
+            </div>
+        </div>
+        <div class="mt-2 item-container task-title-input-container">
+            <label for="">Title</label>
+            <input type="text" value="{{taskModel.title}}" name="taskName" (input)="onTaskNameChange($event)">
+        </div>
+        <div class="mt-2 item-container task-description">
+            <label for="">Description</label>
+            <div class="description" #descritpion (click)="editDesritpion()" contenteditable="true" [class.editing]="isDescriptionFocued">
+                Add a description...
+            </div>
+            <div class="editor-actions" *ngIf="isDescriptionFocued" >
+                <button class="save" (click)="saveDescription()">Save</button>
+                <button class="cancle" (click)="cancleDescription()">Cancle</button>
+            </div>
+        </div>
+        <div class="mt-2 item-container task-comments">
+            <label for="">Comment: </label>
+            <div class="edit-comment">
+                <div class="profile-section">
+                    <app-profile-icon 
+                    [avatar]="user.avatar"></app-profile-icon>
+                </div>
+                <div class="comment-area">
+                    <input class="comment" #comment (click)="editComment()" [(ngModel)]="commentInputString" [class.editing]="isCommendtInputFocused"/>
+                    <div class="editor-actions" *ngIf="isCommendtInputFocused" >
+                        <button class="save" (click)="saveComment()">Save</button>
+                        <button class="cancle" (click)="cancleComment()">Cancle</button>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-container" *ngFor="let comment of taskModel.comments">
+                <div class="profile-section">
+                    <app-profile-icon 
+                    [avatar]="comment.postBy.avatar"></app-profile-icon>
+                </div>
+                <div class="comment-area">
+                    <div class="user-details">
+                        <div class="user-name">
+                            {{comment.postBy.userName}}
+                        </div>
+                        <div class="post-date">
+                            {{comment.createdAt? (comment.createdAt | date: 'MMMM d, y h:mm a' ):"-"}}
+                        </div>
+                    </div>
+                    <div class="comment-string" >
+                        {{comment.commentString}}
+                    </div>
+                    <div class="comment-actions">
+                        <button (click)="deleteComment(comment.commentGUID)">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="not-visible-text">
+                The Comment can be added after the task is saved.
+            </div> -->
+        </div>
+    </div>
+
+
+    <div class="task-right-column-container">
+        <div class="task-actions">
+            <div class="status_action {{status_css_class}}" mat-button [matMenuTriggerFor]="statusMenu" #statusMenuTrigger>
+                <div class="status_text" [ngSwitch]="taskModel.status" >
+                    <div *ngSwitchCase="STATUS.TODO">
+                        To Do
+                    </div>
+                    <div *ngSwitchCase="STATUS.IN_PROGRESS">
+                        In Progress
+                    </div>
+                    <div *ngSwitchCase="STATUS.COMPLETED">
+                        Completed
+                    </div>                                    
+                    <div *ngSwitchCase="STATUS.REOPEN">
+                        Reopen
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2 details-expansion-panel">
+
+            <mat-accordion>
+                <mat-expansion-panel [expanded] = 'true'>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Details
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="details-container">
+                        <div class="detail-container">
+                            <div class="label">
+                                Assignee
+                            </div>
+                            <div class="input">
+                                <button class="input-text intial-logo" mat-button [matMenuTriggerFor]="assigneeMenu" #assigneeMenuTrigger="matMenuTrigger">
+                                    {{taskModel?.assignee?.userName ? taskModel.assignee.userName:'Unassigned'}}
+                                </button>
+                                <div class="avatar-container">
+                                    <img src="../../../../../assets/images/avatar/{{taskModel?.assignee?.avatar?taskModel?.assignee?.avatar:'common'}}.jpg" alt="Avatar Image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-container">
+                            <div class="label">
+                                Priority
+                            </div>
+                            <div class="input" >
+                                <button class="input-text" [ngSwitch]="taskModel.priority" mat-button [matMenuTriggerFor]="priorityMenu" #priorityMenuTrigger>
+                                    <div *ngSwitchCase="PRIORITIES.LOW" class="priority-container">
+                                        <i class="priority fa fa-angle-down"></i>
+                                        <label class="priority-label">Low</label>
+                                    </div>
+
+                                    <div *ngSwitchCase="PRIORITIES.MEDIUM" class="priority-container">
+                                        <i class="priority fa-solid fa-equals"></i>
+                                        <label class="priority-label">Medium</label>
+                                    </div>
+
+                                    <div *ngSwitchCase="PRIORITIES.HIGH" class="priority-container">
+                                        <i class="priority fa-solid fa-angle-up"></i>
+                                        <label class="priority-label">High</label>
+                                    </div>                                    
+                                    
+                                    <div *ngSwitchCase="PRIORITIES.HIGHEST" class="priority-container">
+                                        <i class="priority fa-solid fa-angles-up"></i>
+                                        <label class="priority-label">Highest</label>
+                                    </div>
+
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div class="detail-container mt-2">
+                            <div class="label">
+                                Created By
+                            </div>
+                            <div class="input">
+                                <button class="input-text intial-logo"  mat-button priorityMenuTrigger="priorityMenu">
+                                    {{taskModel?.createdBy?.userName}}
+                                </button>
+                                <div class="avatar-container">
+                                    <img src="../../../../../assets/images/avatar/{{taskModel?.createdBy?.avatar ? taskModel?.createdBy?.avatar:'common'}}.jpg" alt="Avatar Image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-container mt-2">
+                            <div class="label">
+                                Created At
+                            </div>
+                            <div class="input">
+                                <div class="input-text">
+                                  {{taskModel.createdAt? (taskModel.createdAt | date: 'MMMM d, y h:mm a' ):"-"}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-container mt-2">
+                            <div class="label">
+                                Updated At
+                            </div>
+                            <div class="input">
+                                <div class="input-text">
+                                    {{taskModel.createdAt? (taskModel.updatedAt | date: 'MMMM d, y h:mm a' ):"-"}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+
+<mat-menu #statusMenu="matMenu">
+    <div mat-menu-item *ngFor="let transition of transitions" (click)="onStatusChange(transition.status)">
+        {{transition.text}}
+    </div>
+</mat-menu>
+
+<mat-menu #assigneeMenu="matMenu">
+    <div mat-menu-item *ngFor="let member of teamMembers" (click)="onAssigneeChange(member)">
+        {{member.userName}}
+    </div>
+</mat-menu>
+
+
+<mat-menu #priorityMenu="matMenu">
+    <div mat-menu-item class="priority-container" (click)="onPriorityChange(PRIORITIES.LOW)">
+        <i class="priority  fa-solid fa-angle-down"></i>
+        <label class="priority-label">Low</label>
+    </div>
+
+    <div mat-menu-item class="priority-container" (click)="onPriorityChange(PRIORITIES.MEDIUM)">
+        <i class="priority fa-solid fa-equals"></i>
+        <label class="priority-label">Medium</label>
+    </div>
+
+    <div mat-menu-item class="priority-container" (click)="onPriorityChange(PRIORITIES.HIGH)">
+        <i class="priority fa-solid fa-angle-up"></i>
+        <label class="priority-label">High</label>
+    </div>                                    
+    
+    <div mat-menu-item class="priority-container" (click)="onPriorityChange(PRIORITIES.HIGHEST)">
+        <i class="priority fa-solid fa-angles-up"></i>
+        <label class="priority-label">Highest</label>
+    </div>
+</mat-menu>

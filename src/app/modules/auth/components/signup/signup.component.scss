@@ -1,0 +1,87 @@
+@import '../../../../../assets/styles/colors.scss';
+
+
+.main{
+    width: 100vw;
+    min-height: 100vh;
+}
+.user-signin{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    .content-wrapper{
+        width: 100%;
+        flex: auto;
+        .signin-container{
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .user-signin-card{
+                width: 300px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                background-color: $card_background;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                padding: 32px 40px;
+            }
+        }
+    }
+}
+
+.heading-container{
+    .signin-img{
+        margin: 10px;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        letter-spacing: 0.3ch;
+        text-align: center;
+
+        span{
+            color:$primary_color2;
+        }
+    }
+    .signin-heading{
+        margin: 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.2ch;
+        text-align: center;
+    }
+}
+.signin-form-container{
+    width: 100%;
+
+    .form-group{
+        margin-top: 16px;
+        outline: none;
+        box-shadow: none;
+        input{
+            border: 2px solid $gray_1;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+        .other-options{
+            display: flex;
+            color: $black;
+            font-size: 14px;
+        }
+    }
+}
+
+.submit-btn-container{
+    width: 100%;
+    display: flex;
+    button{
+        width: 100%;
+        margin: 10px 0px;
+        padding: 10px;
+        font-size: 1rem;
+        background-color: $primary_color2;
+        color:$primary_color;
+        border: none;
+    }
+}

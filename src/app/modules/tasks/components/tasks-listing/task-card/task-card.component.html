@@ -1,0 +1,45 @@
+<div class="task-card">
+
+    <div class="task-info-container">
+        <div class="title">
+            {{task.title}}
+        </div>
+        <div class="delete-icon">
+           <i class="icon fa-solid fa-trash-o"></i>
+        </div>
+    </div>
+
+    <div class="priority-container" [ngSwitch]="task.priority">
+        <i *ngSwitchCase="PRIORITIES.LOW" class="priority fa-solid fa-angle-down"></i>
+        <i *ngSwitchCase="PRIORITIES.MEDIUM" class="priority fa-solid fa-equals"></i>        
+        <i *ngSwitchCase="PRIORITIES.HIGH"class="priority fa-solid fa-angle-up"></i> 
+        <i *ngSwitchCase="PRIORITIES.HIGHEST"class="priority fa-solid fa-angles-up"></i> 
+    </div>
+
+    <div class="task-status">
+        <div class="status_text {{STATUS_CSS_CLASS[task.status]}}" [ngSwitch]="task.status">
+            <div *ngSwitchCase="STATUS.TODO">
+                To Do
+            </div>
+            <div *ngSwitchCase="STATUS.IN_PROGRESS">
+                In Progress
+            </div>
+            <div *ngSwitchCase="STATUS.COMPLETED">
+                Completed
+            </div>                                    
+            <div *ngSwitchCase="STATUS.REOPEN">
+                Reopen
+            </div>
+        </div>
+    </div>
+
+    <div class="task-info-container">
+        <div class="name">
+            <a [routerLink]="[task.name]">{{task.name}}</a>
+        </div>
+        <div class="assignee">
+            <app-profile-icon 
+                    [avatar]="task.createdBy.avatar"></app-profile-icon>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="topbar">
+    <div class="page-title">
+            Team
+            <span class="total-count">
+              {{team.length}}
+            </span>
+    </div>
+</div>
+
+<div class="members-listing-container" #tasksContainer>
+  <div class="add-new-member" *ngIf="projectService.isLeader()">
+    <input type="email"  placeholder="Add Member's mail" #memberEmailInput="ngModel" [(ngModel)]="newMemberEmail">
+    <button (click)="addNewMemeber()">+</button>
+  </div>
+    <app-member-card  *ngFor="let member of team"
+    [data]='member'></app-member-card>
+</div>

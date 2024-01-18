@@ -1,0 +1,73 @@
+<div class="topbar">
+        <div class="page-title">
+                Tasks
+        </div>
+        <div>
+          <input type="text" name="" id="" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText">
+        </div>
+        <div>
+          <span class="total-count">
+                  {{tasks.length}}
+          </span>
+        </div>
+        <div>
+                <button (click)="createTaskClicked()">Add Task</button>
+        </div>
+        <div class="filters">
+                <div class="filter status-filter" [matMenuTriggerFor]="statusMenu">
+                   <div class="label" [ngClass]="{'selected': statusFilterList.length>0}">
+                        Status
+                   </div> 
+                   <div *ngIf="statusFilterList.length>0" class="filter-item">
+                        : {{getStatusText(statusFilterList[0])}}
+                        <span *ngIf="statusFilterList.length>1" class="filter-count">
+                                +{{statusFilterList.length - 1}}
+                        </span>
+                   </div>
+                   <div class="menu-icon" >
+                        <i class="fa-solid fa-angle-down"></i>
+                   </div>
+                </div>
+
+                <div class="filter prioriy-filter" [matMenuTriggerFor]="priorityMenu">
+                        <div class="label" [ngClass]="{'selected': priorityFilterList.length>0}">
+                             Priority
+                        </div> 
+                        <div *ngIf="priorityFilterList.length>0" class="filter-item">
+                             : {{getPriorityText(priorityFilterList[0])}}
+                             <span *ngIf="priorityFilterList.length>1" class="filter-count">
+                                     +{{priorityFilterList.length - 1}}
+                             </span>
+                        </div>
+                        <div class="menu-icon" >
+                             <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                </div>
+        </div>
+        
+</div>
+
+<div class="tasks-listing-container" #tasksContainer>
+        <app-task-card  *ngFor="let task of tasks"
+        [task]='task'></app-task-card>
+</div>
+<div *ngIf="tasks.length == 0 " class="no-result">
+        No Task Found Matching Your Search
+</div>
+
+<div class="load-more-container" *ngIf="totalCount>tasks.length">
+        <button (click)="loadMoreClicked()">Load More...</button>
+</div>
+
+
+<mat-menu #statusMenu="matMenu">
+        <div  *ngFor="let status of TASK_STATUSES" mat-menu-item >
+           <mat-checkbox class="mat-menu__checkbox" (click)="statusFilterChange($event,status['id'])" #cb>{{status.value}}</mat-checkbox>
+        </div>
+</mat-menu>
+
+<mat-menu #priorityMenu="matMenu">
+        <div  *ngFor="let priority of TASK_PRIORITIES" mat-menu-item >
+           <mat-checkbox class="mat-menu__checkbox" (click)="priorityFilterChange($event,priority['id'])" #cb>{{priority.value}}</mat-checkbox>
+        </div>
+</mat-menu>

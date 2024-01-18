@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/colors.scss';
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: 'Mooli', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  color: $main_text_color;
+}
+
+.avatar-container{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.priority{
+  font-size: 18px;
+  &.fa-angle-down::before{
+    color: green;
+  }
+  &.fa-equals::before{
+    color: orange;
+  }
+  &.fa-angle-up::before{
+    color: #fa2a2a;
+  }
+  &.fa-angles-up::before{
+    color: red;
+  }
+}
+.priority-label{
+  margin-left: 8px;
+
+}
+
+
+// TASK STATUS STYLE 
+
+.status-in-progress{
+  background-color: $primary_color2 !important;
+  color:$primary_color !important;
+}
+.status-completed{
+  background-color: $success_green !important;
+  color:$primary_color !important;
+}
+

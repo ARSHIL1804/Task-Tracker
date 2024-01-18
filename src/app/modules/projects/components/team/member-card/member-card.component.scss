@@ -1,0 +1,46 @@
+@import '../../../../../../assets/styles/colors.scss';
+
+.memebr-card{
+    width: 200px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid $gray_2;
+    padding: 10px;
+    font-size: 12px;
+    background-color: $card_background;
+    border-radius: 8px;
+
+    .member-info-container{
+        margin-top: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .name{
+            font-size: 18px;
+            line-height: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+        .email{
+            margin-top: 8px;
+            font-size: 12px;
+            line-height: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+        }
+    }
+    .task-info .status-info{
+        font-weight: 500;
+    }
+}

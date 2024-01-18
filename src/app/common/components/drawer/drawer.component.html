@@ -1,0 +1,20 @@
+<main>
+    <ul class="nav-list">
+        <li class="nav-list-item" routerLinkActive="active" *ngFor="let item of list">
+            <i class="icon {{item.icon}}"></i>
+            <span>
+                <a routerLink='{{item.path}}'>{{item.name}}</a>
+            </span>
+        </li>
+        
+        <li class="nav-list-item" routerLinkActive="active">
+            <i class="icon fa-solid fa-sign-out"></i>
+            <span>
+                <a (click)="logOut()" >Log Out</a>
+            </span>
+        </li>
+    </ul>
+
+
+
+</main>

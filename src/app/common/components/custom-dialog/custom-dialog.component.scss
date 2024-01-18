@@ -1,0 +1,36 @@
+@import '../../../../assets/styles/colors.scss';
+
+.dialog-container{
+    padding: 24px;
+    width: auto;
+
+    .title{
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .content{
+        font-size: 13px;
+        padding-top:16px ;
+    }
+
+    .actions{
+        display: flex;
+        justify-content: center;
+        padding-top:16px ;
+        button{
+            width: 90px;
+            height: 32px;
+            padding: 0px 16px;
+            margin: 0px 8px;
+            font-size: 14px;
+            font-weight: 400;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            color: $primary_color;
+            background-color: $primary_color2;
+
+        }
+    }
+}

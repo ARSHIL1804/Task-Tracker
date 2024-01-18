@@ -1,0 +1,51 @@
+<main class="main user-login">
+    <div class="content-wrapper">
+        <div class="login-container">
+            <mat-card class="user-login-card">
+                <div class="heading-container">
+                    <div class="login-img">
+                        TASK <span>TRACKER</span>
+                    </div>
+                    <div class="login-heading">
+                        Log In
+                    </div>
+                </div>
+                <div class="login-form-container">
+                    <form [formGroup]="userLoginForm">
+                        <div class="form-group">
+                            <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                                name="email" [ngClass]="{ 'is-invalid': submitClicked && f.email.errors }"
+                                [(ngModel)]="userLoginModel.userEmail" autocomplete="off" (change)="emailChange()">
+                            <div *ngIf="submitClicked && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.pattern">Email is not valid</div>
+                                <div *ngIf="f.email.errors.feildError">{{ERROR_ENUMS.USER_NOT_FOUND.errorMessage}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" formControlName="password" class="form-control" placeholder="Password"
+                                name="password" [ngClass]="{ 'is-invalid': submitClicked && f.password.errors }" 
+                                [(ngModel)]="userLoginModel.userPassword" autocomplete="off" (change)="passwordChange()">
+                            <div *ngIf="submitClicked && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.feildError">{{ERROR_ENUMS.PASS_WRONG.errorMessage}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group submit-btn-container">
+                            <button class="btn btn-primary" (click)="loginUser()">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="other-options">
+                    <div class="signup">
+                        Create new account <a href="/auth/signup">Sign Up</a>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+</main>
