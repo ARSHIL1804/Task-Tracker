@@ -74,6 +74,7 @@ app-drawer{
 }
 
 .display-content{
+    background-color: $main_background;
     position: absolute;
     left: $drawer-width;
     width: calc(100% - $drawer-width);

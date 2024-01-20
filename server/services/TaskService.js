@@ -58,6 +58,15 @@ class TaskService{
             throw error;
         }
     }
+
+    deleteTasks = async (query) => {
+        try {
+           await taskModel.deleteMany(query);
+        } 
+        catch (error) {
+            throw error;
+        }
+    }
     
     changeAssignee = async (query,userGUID) => {
         try {
@@ -69,6 +78,7 @@ class TaskService{
             throw error;
         }
     }
+
     postComment = async (query, commentString, userId) => {
         const session = await mongoose.startSession();
         try {
@@ -127,6 +137,12 @@ class TaskService{
 
         var totalTasks = data.length;
         return {completedTasks,inProgressTasks,totalTasks};
+    }
+
+    getProjectTasksCount = async (projectId) =>{
+        var totalTasks = await taskModel.count({ project: projectId });
+        var completedTasks = await taskModel.count({ project: projectId, status: 2 });
+        return {totalTasks, completedTasks};
     }
 }
 

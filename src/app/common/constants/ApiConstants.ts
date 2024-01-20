@@ -21,6 +21,8 @@ export const API_CONTANTS = {
     GET_PROJECTS: SERVER + 'projects',
     CREATE_PROJECT: SERVER + 'projects/create-project',
     GET_PROJECT: SERVER + 'projects/get-project',
+    DELETE_PROJECT: SERVER + 'projects/delete-project',
+
     GET_TEAM_MEMBERS_NAME: SERVER + 'projects/project/team-members-names',
     GET_TEAM: SERVER + 'projects/project/team',
     ADD_MEMBER: SERVER + 'projects/project/add-member',

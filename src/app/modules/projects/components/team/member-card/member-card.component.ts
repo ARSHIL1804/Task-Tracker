@@ -17,4 +17,11 @@ export class MemberCardComponent implements OnInit{
   }
   ngOnInit(){
   }
+
+  getProgress(){
+    if(this.data?.taskData?.totalTasks != 0){
+      return (this.data?.taskData?.completedTasks/this.data?.taskData?.totalTasks) * 100;
+    }
+    return 100;
+  }
 }

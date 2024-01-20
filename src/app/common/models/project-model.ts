@@ -7,6 +7,10 @@ export class ProjectModel{
     public projectGUID:string;
     public lead:UserDetailsModel
     public members:[UserDetailsModel];
+    public totalMembers:number;
+    public totalTasks:number;
+    public completedTasks:number;
+
 
 
     constructor(){
@@ -14,5 +18,6 @@ export class ProjectModel{
         this.key = '';
         this.description = '';
         this.projectGUID='';
+        this.totalMembers=0;
     }
 }

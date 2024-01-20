@@ -64,7 +64,7 @@ export class TeamComponent implements OnInit{
     this.api
     .post(API_CONTANTS.ADD_MEMBER,{filter,email:this.newMemberEmail})
     .then( (res:any) => {
-    
+      this.team = res.data;
     })
     .catch(err=>{
       if(err.status === ERROR_ENUMS.DUPLICATE_USER.errorCode){

@@ -17,7 +17,9 @@ import { TeamComponent } from './components/team/team.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MemberCardComponent } from './components/team/member-card/member-card.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { ProjectCardComponent } from './components/projects-listing/project-card/project-card.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ProfileIconComponent } from 'src/app/common/components/profile-icon/profile-icon.component';
 @NgModule({
   declarations: [
     ProjectsComponent,
@@ -25,7 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CreateProjectComponent,
     ProjectComponent,
     TeamComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    ProjectCardComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     TasksModule,
     MatPaginatorModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressBarModule
   ]
 })
 export class ProjectsModule { }

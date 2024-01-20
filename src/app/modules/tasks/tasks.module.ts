@@ -7,8 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TasksComponent } from './tasks.component';
-import { HeaderComponent } from 'src/app/common/components/header/header.component';
-import { DrawerComponent } from 'src/app/common/components/drawer/drawer.component';
 import { TasksListingComponent } from './components/tasks-listing/tasks-listing.component';
 import { TaskCardComponent } from './components/tasks-listing/task-card/task-card.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';

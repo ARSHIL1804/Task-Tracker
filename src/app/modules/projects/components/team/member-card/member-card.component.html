@@ -1,27 +1,27 @@
-<div class="memebr-card">
+<div class="memebr-container">
 
-    <div class="member-info-container">
+    <div class="header">
         <div class="name">
             {{data.user.userName}}
         </div>
         <div class="email">
             {{data.user.userEmail}}
-
+        </div>
+        <div class="member-avatar">
+            <div class="profile-icon">
+                <img src="/assets/images/avatar/{{data.user.avatar?data.user.avatar:'avatar1'}}.jpg" alt="" srcset="">
+            </div>
         </div>
     </div>
 
-
-    <div class="task-info">
-        <div class="status-info">
-            <label >In Progress : {{data.taskData.inProgressTasks}}</label>
-        </div>
-        <div class="status-info">
-            <label >Completed : {{data.taskData.completedTasks}}</label>
-        </div>
-        <div class="status-info">
-            <label >Total Assigned : {{data.taskData.totalTasks}}</label>
+    <div class="body">
+        <div class="task-count">
+            <i class="fa-solid fa-tasks"></i> <span class="text"><span class="completed">{{data.taskData.completedTasks}}</span>/{{data.taskData.totalTasks}} Tasks <span class="completed">Completed</span></span>
         </div>
 
+        <div class="progress-bar">
+            <mat-progress-bar mode="determinate" [value]="getProgress()"></mat-progress-bar>
+        </div>
     </div>
 
 </div>

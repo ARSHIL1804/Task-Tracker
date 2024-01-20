@@ -57,11 +57,21 @@ class ProjectController {
             let query = {
                 members : {$elemMatch : {$eq:req.user._id}}
             }
-            const projects = await this.projectModel.find(query,{name:1,key:1,lead:1,projectGUID:1,totalMembers:{$size:"$members"}}).populate({path:'lead',select:'userName userEmail avatar userGUID'});
-            const httpRes = new HttpResponse(projects);
+            const projects = await this.projectModel.find(query,{_id:1,name:1,key:1,lead:1,projectGUID:1,members:1}).populate({path:'lead',select:'userName userEmail avatar userGUID'});;
+            console.log(projects);
+            const projectInfo = await Promise.all(projects.map(async (project)=>{
+                let {totalTasks,completedTasks} = await this.taskService.getProjectTasksCount(project._id);
+                return {
+                        name:project.name,key:project.key,projectGUID:project.projectGUID,totalMembers:project.members.length,
+                        lead:{userName:project.lead.userName,userEmail:project.lead.userEmail,avatar:project.lead.avatar,userGUID:project.lead.userGUID},
+                        totalTasks,completedTasks
+                       };
+            }));
+            const httpRes = new HttpResponse(projectInfo);
             return res.status(httpRes.statusCode).json(httpRes);
         }
         catch (err) {
+
             console.log(err)
             const error = new Error(SOMETHING_WRONG.errorMessage);
             error.statusCode = SOMETHING_WRONG.errorCode;
@@ -92,6 +102,26 @@ class ProjectController {
         }
     }
 
+    deleteProject = async (req, res, next) =>{
+        try {
+            console.log(req.body.projectKey, req.body.lead);
+            const projectId  = await this.projectService.getProjectId(req.body.projectKey, req.body.lead);
+            if(!projectId){
+                const error = new Error(PROJECT_NOT_FOUND.errorMessage);
+                error.statusCode = PROJECT_NOT_FOUND.errorCode;
+                return next(error);
+            }
+            await this.taskService.deleteTasks({project:projectId});
+            await this.projectModel.deleteOne({'_id':projectId});
+            return this.getProjects(req, res, next);
+        }
+        catch (err) {
+            console.log(err);
+            const error = new Error(SOMETHING_WRONG.errorMessage);
+            error.statusCode = SOMETHING_WRONG.errorCode;
+            next(error);
+        }
+    }
     getTeamMembersName = async (req, res, next) =>{
         try {
             const projectId  = await this.projectService.getProjectId(req.query.projectKey, req.query.lead);
@@ -121,7 +151,7 @@ class ProjectController {
                 error.statusCode = PROJECT_NOT_FOUND.errorCode;
                 return next(error);
             }
-            const team = await this.projectModel.findOne({_id:projectId._id},{"_id":0,"members":1}).populate({path:'members', select:'userName userEmail avatat userGUID'});
+            const team = await this.projectModel.findOne({_id:projectId._id},{"_id":0,"members":1}).populate({path:'members', select:'userName userEmail avatar userGUID'});
             console.log(team.members)
             const teamData = await Promise.all(
                 team.members.map(async (user) => {
@@ -150,13 +180,15 @@ class ProjectController {
                 return next(error);
             }
             const userId = await this.userModel.findOne({'userEmail':req.body.email},'_id');
+            console.log(userId);
             if(!userId){
                 const error = new Error(USER_NOT_FOUND.errorMessage);
                 error.statusCode = USER_NOT_FOUND.errorCode;
                 return next(error);
             }
 
-            const userInProject = await this.projectModel.findOne({'members':{$in:[userId]}},'_id');
+            const userInProject = await this.projectModel.findOne({'_id':projectId,'members':{$in:[userId]}},'_id');
+            console.log(userInProject);
             if(userInProject){
                 const error = new Error(DUPLICATE_USER.errorMessage);
                 error.statusCode = DUPLICATE_USER.errorCode;
@@ -180,7 +212,7 @@ class ProjectController {
 
 
     getTasks = async (req, res, next) => {
-        console.log("HELLO")
+        console.log("HELLO",req.query)
         try{
             const {searchText, pageIndex, pageSize} = req.query;
             const query = {
@@ -190,7 +222,7 @@ class ProjectController {
                 ],
             };
             console.log(req.query.projectKey, req.query.lead);
-            const projectId  = await this.projectService.getProjectId(req.query.projectKey, req.query.lead);
+            const projectId  = await this.projectService.getProjectId(req.query.projectKey, "Arshil@1804");
             if(!projectId){
                 const error = new Error(PROJECT_NOT_FOUND.errorMessage);
                 error.statusCode = PROJECT_NOT_FOUND.errorCode;
@@ -300,6 +332,7 @@ class ProjectController {
             next(error);
         }
     }
+
     postComment = async (req, res, next) => {
         try{
             const projectId = await this.projectService.getProjectId(req.body.projectKey, req.body.lead);
@@ -336,6 +369,7 @@ class ProjectController {
             next(e);
         }
     }
+
 
 }
 

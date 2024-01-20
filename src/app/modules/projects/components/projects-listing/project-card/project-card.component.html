@@ -1,0 +1,32 @@
+<div class="project-container">
+    <div class="header">
+        <div class="left">
+            <div><h4 class="name mb-1">{{project.name}}</h4></div>
+			<div><a class="key" [routerLink]="[project.lead.userName,project.key]" >{{project.key}}</a></div>
+        </div>
+        <div class="right">
+            <div class="project-action" (click)="deleteProjectClicked(project.lead.userName,project.key)">
+                <i class="icon fa-solid fa-trash-o"></i>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="descripion">
+            {{project.description?project.description: 'Hello this is the project we were talking about'}}
+        </div>
+
+        <div class="project-lead">
+            <i class="fa-solid fa-user"></i> <span class="text">Lead : {{project.lead.userName}}</span>
+        </div>
+        <div class="task-count">
+            <i class="fa-solid fa-tasks"></i> <span class="text"><span class="completed">{{project.completedTasks}}</span>/{{project.totalTasks}} Tasks <span class="completed">Completed</span></span>
+        </div>
+    
+
+        <div class="team-count">
+            <i class="fa-solid fa-users"></i> <span class="text">{{project.totalMembers}}</span>
+        </div>
+    </div>
+    
+
+</div>

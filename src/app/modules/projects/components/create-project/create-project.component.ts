@@ -89,7 +89,7 @@ export class CreateProjectComponent implements OnInit{
         .post(API_CONTANTS.CREATE_PROJECT,this.projectModel)
         .then((response:any)=>{
           const lead = response.data.lead;
-          this.router.navigate(['/projects',encodeURIComponent(lead.userName),encodeURIComponent(response.data.key),'tasks']);
+          this.router.navigate(['/projects',lead.userName,response.data.key,'tasks']);
         })
         .catch(err=>{
           switch(err.status){

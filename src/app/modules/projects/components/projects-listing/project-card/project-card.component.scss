@@ -1,19 +1,20 @@
 @import '../../../../../../assets/styles/colors.scss';
 
-.memebr-container{
+.project-container{
     display: flex;
     flex-direction: column;
     width: 240px;
-    padding: 12px;
+    padding: 12px 0px;
     border-radius: 4px;
     background-color: $card_background;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     .header{
+        padding: 0px 12px;
         display: flex;
         justify-content: space-between;
         position: relative;
-        flex-direction: column;
+        border-bottom: 2px solid $main_background;
 
         .name{
             font-size: 20px;
@@ -21,25 +22,20 @@
             font-weight: 600;
             text-align: left;
         }
-        .email{
+        .key{
+            text-decoration: none;
             font-size: 12px;
         }    
-        .member-avatar{
-            position: absolute;
-            right: 0;
-            .profile-icon{
-                width: 24px;
-                height: 24px;
-                img{
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 50%;
-                }
+
+        .project-action{
+            i{
+                cursor: pointer;
+                color:$primary_color2;
             }
         }
     }
     .body{
-        padding: 12px 0px;
+        padding: 12px 12px;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
@@ -49,7 +45,7 @@
             font-weight: 500;
             color: $gray_5;
         }
-        .task-count{
+        .team-count,.task-count,.project-lead{
             margin-top: 8px;
             font-weight: 700;
             i{
@@ -63,16 +59,6 @@
                 }
             }
         }
-
-        .progress-bar{
-            margin-top: 12px;
-        }
-
-        div.mat-progress-bar-primary.mat-progress-bar-fill.mat-progress-bar-element::after{
-            background-color: $primary_color2;
-        }
-        
-        
     }
 
 }

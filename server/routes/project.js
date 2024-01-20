@@ -6,9 +6,12 @@ const AuthController = require('../controllers/AuthController');
 router.get('',AuthController.checkLogin,ProjectController.getProjects);
 router.post('/create-project',AuthController.checkLogin,ProjectController.createProject);
 router.get('/get-project',AuthController.checkLogin,ProjectController.getProject);
+router.post('/delete-project',AuthController.checkLogin,ProjectController.deleteProject);
 router.get('/project/team-members-names',AuthController.checkLogin,ProjectController.getTeamMembersName);
 router.get('/project/team',AuthController.checkLogin,ProjectController.getTeamInfo);
 router.post('/project/add-member',AuthController.checkLogin,ProjectController.addTeamMember);
+
+
 
 
 
